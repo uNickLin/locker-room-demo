@@ -133,7 +133,7 @@ header{
 	}
 	.headerRight{
 		position: absolute;
-		right: 20px;
+		right: 0px;
 		a{
 			padding: 20px 0;
 		}
@@ -322,6 +322,9 @@ main.content{
 		@media (max-width: 991px){
 			height: 100%;
 			padding: 0;
+			h4{
+				display: none;
+			}
 			.row{
 				display: flex;
 				justify-content: space-between;
@@ -363,6 +366,7 @@ main.content{
 		background-color: #F2F2F2;
 		border-right: 1px solid rgba(0, 0, 0, .2);
 		border-left: 1px solid rgba(0, 0, 0, .2);
+		height: 100vh;
 		#trouser, #skirt, #dress, #bag, #shoes{
 			display: none;
 		}

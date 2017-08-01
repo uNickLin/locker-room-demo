@@ -538,10 +538,6 @@ $('.addCart').on('click', function () {
 
 	$('.cartList').prepend('<li class="cartItem"><div class="cartItemImage"><img src="' + cartItemImage + '" alt=""></div><div class="cartItemInfo"><span>' + cartItemBrand + '</span><h5>' + cartItemName + '</h5><span>' + cartItemPrice + '</span></div><button class="delCartItem fa fa-trash-o"></button></li>')
 
-	// for (var cart = 0; cart < cartItems.length; cart++) {
-	// 	$('.cartList').prepend('<li class="cartItem"><div class="cartItemImage"><img src="' + cartItems[cart].image + '" alt=""></div><div class="cartItemInfo"><span>' + cartItems[cart].brand + '</span><h5>' + cartItems[cart].name + '</h5><span>' + cartItems[cart].price + '</span></div><button class="delCartItem"></button></li>')
-	// }
-
 	$('#myModal').find('button.close').click()
 	snack()
 })
@@ -574,28 +570,10 @@ $('.user a').on('click', function () {
 	$(this).siblings('.loginOptions').toggleClass('showLogIn')
 })
 
-//close user/cart/menu window when click somewhere else
-// $(document).mouseup(function (e) {
-// 	var userBlock = $('.loginOptions')
-// 	var cartBlock = $('.cartList')
-// 	var mobileMenu = $('.genderSelectMobile')
-
-	// if (!userBlock.is(e.target) && userBlock.has(e.target).length === 0) {
-	// 	userBlock.removeClass('showLogIn')
-	// }
-	// if (!cartBlock.is(e.target) && cartBlock.has(e.target).length === 0) {
-	// 	cartBlock.removeClass('show')
-	// }
-	// if (!mobileMenu.is(e.target) && mobileMenu.has(e.target).length === 0) {
-	// 	mobileMenu.removeClass('showMenu')
-	// }
-// })
-
 
 //display menu list on mobile device
 $('.mobileMenu').on('click', function () {
 	$('.genderSelectMobile').toggleClass('showMenu')
-	console.log('menu !')
 })
 
 
