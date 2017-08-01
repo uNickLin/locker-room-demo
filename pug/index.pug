@@ -68,57 +68,57 @@ html
 							input(type="text" placeholder="密碼")
 							input(type="submit" value="登入")
 		main.content
-			.container
+			.container-fluid
 				.row
-					.col-sm-3
+					.col-md-3.col-sm-12.col-xs-12
 						section.categoryPanel
-							h4 商品類別
-							.row
-								.col-sm-6
+							//- h4 商品類別
+							.row.categoryRow
+								.col-md-6
 									.categories(style="opacity: .4;")
 										img(src="../img/icon-01.png", alt="")
 										p 髮型
-								.col-sm-6
+								.col-md-6
 									.categories(style="opacity: .4;")
 										img(src="../img/icon-02.png", alt="")
 										p 飾品
-								.col-sm-6
+								.col-md-6
 									.categories(style="opacity: .4;")
 										img(src="../img/icon-03.png", alt="")
 										p 內搭
-								.col-sm-6
+								.col-md-6
 									.categories.top.active
 										img(src="../img/icon-04.png", alt="")
 										p 上衣
-								.col-sm-6
+								.col-md-6
 									.categories(style="opacity: .4;")
 										img(src="../img/icon-05.png", alt="")
 										p 外套
-								.col-sm-6
+								.col-md-6
 									.categories.dress
 										img(src="../img/icon-06.png", alt="")
 										p 洋裝
-								.col-sm-6
+								.col-md-6
 									.categories.skirt
 										img(src="../img/icon-08.png", alt="")
 										p 裙子
-								.col-sm-6
+								.col-md-6
 									.categories.trouser
 										img(src="../img/icon-09.png", alt="")
 										p 褲子
-								.col-sm-6
+								.col-md-6
 									.categories.bag
 										img(src="../img/icon-07.png", alt="")
 										p 包包
-								.col-sm-6
+								.col-md-6
 									.categories.shoes
 										img(src="../img/icon-10.png", alt="")
 										p 鞋子
 
-					.col-sm-4
+					.col-md-4.col-sm-4.col-xs-3
 						section.itemPanel
 							//- top pannel
-							.row.text-center#top
+							.row.text-center.itemRow#top
 								.col-sm-6.col-xs-12
 									.items
 										.infoBtn.fa.fa-search
@@ -142,7 +142,7 @@ html
 										span $990
 							
 							//- trouser pannel
-							.row.text-center#trouser
+							.row.text-center.itemRow#trouser
 								.col-sm-6
 									.items
 										.infoBtn.fa.fa-search
@@ -159,7 +159,7 @@ html
 										span $1090
 
 							//- skirt pannel
-							.row.text-center#skirt
+							.row.text-center.itemRow#skirt
 								.col-sm-6
 									.items
 										.infoBtn.fa.fa-search
@@ -176,7 +176,7 @@ html
 										span $1990
 
 							//- dress pannel
-							.row.text-center#dress
+							.row.text-center.itemRow#dress
 								.col-sm-6
 									.items
 										.infoBtn.fa.fa-search
@@ -200,7 +200,7 @@ html
 										span $1090
 
 							//- bag pannel
-							.row.text-center#bag
+							.row.text-center.itemRow#bag
 								.col-sm-6
 									.items
 										.infoBtn.fa.fa-search
@@ -224,7 +224,7 @@ html
 										span $2900
 
 							//- shoes pannel
-							.row.text-center#shoes
+							.row.text-center.itemRow#shoes
 								.col-sm-6
 									.items
 										.infoBtn.fa.fa-search
@@ -247,19 +247,19 @@ html
 										p 黑色厚底台涼鞋
 										span $1990
 
-					.col-sm-5
-						section.avatarPanel
+					.col-md-5.col-sm-8.col-xs-9
+						section.modelPanel
 							//- button.clear clear
 							.model
-								.selectItem(style='background-image: url(../img/dress/use/dress_00.png)' data-label="上衣")
-								.selectItem(style='background-image: url(../img/bag/use/bag_00.png)' data-label="包包")
-								.selectItem(style='background-image: url(../img/shoes/use/shoes_00.png)' data-label="鞋子")
+								.modelItem(style='background-image: url(../img/dress/use/dress_00.png)' data-label="洋裝")
+								.modelItem(style='background-image: url(../img/bag/use/bag_00.png)' data-label="包包")
+								.modelItem(style='background-image: url(../img/shoes/use/shoes_00.png)' data-label="鞋子")
 								ul.demoList
-									li.modelItem(style='background-image: url(../img/dress/display/dress_000.png)')
+									li.selectListItem(style='background-image: url(../img/dress/display/dress_000.png)')
 										.deleteBtn &#10006;
-									li.modelItem(style='background-image: url(../img/bag/display/bag_000.png)')
+									li.selectListItem(style='background-image: url(../img/bag/display/bag_000.png)')
 										.deleteBtn &#10006;
-									li.modelItem(style='background-image: url(../img/shoes/display/shoes_000.png)')
+									li.selectListItem(style='background-image: url(../img/shoes/display/shoes_000.png)')
 										.deleteBtn &#10006;
 
 

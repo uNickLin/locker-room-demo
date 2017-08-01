@@ -318,11 +318,13 @@ var apparelList = [{
 
 //toggle item panel
 $('.categories').on('click', function () {
-	$('.row.text-center').hide()
 	var part = $(this).prop('className').split(' ')[1]
-	$('#' + part).show()
-	$('.categories').removeClass('active')
-	$('.categories.' + part).addClass('active')
+	if (part !== undefined) {
+		$('.row.text-center').hide()
+		$('#' + part).show()
+		$('.categories').removeClass('active')
+		$('.categories.' + part).addClass('active')
+	}
 })
 
 
@@ -351,8 +353,8 @@ $('.items').click(function () {
 	}
 
 	//find repeat item
-	for (var i = 0; i < $('.selectItem').length; i += 1) {
-		thisUseUrl = '../img'.concat($('.selectItem').eq(i).css('background-image').split('/img')[1]) // " ...png") "
+	for (var i = 0; i < $('.modelItem').length; i += 1) {
+		thisUseUrl = '../img'.concat($('.modelItem').eq(i).css('background-image').split('/img')[1]) // " ...png") "
 		currentUseUrl = thisUseUrl.slice(0, thisUseUrl.length - 2) // " ...png "
 
 		//detect repeat item by compare use.url image
@@ -365,63 +367,63 @@ $('.items').click(function () {
 	////if there's no repeat item url, 'repeatCounts' will maintain 0
 	if (repeatItem === 0) {
 
-		for (var i = 0; i < $('.selectItem').length; i += 1) {
-			currentLabel = $('.selectItem').eq(i).attr('data-label')
+		for (var i = 0; i < $('.modelItem').length; i += 1) {
+			currentLabel = $('.modelItem').eq(i).attr('data-label')
 			if (currentLabel === itemClickLabel) {
 				repeatCategory += 1
 				thisOne = i
 			}
 
 			if (itemClickLabel === '洋裝') {
-				for (var x = 0; x < $('.selectItem').length; x += 1) {
-					if ($('.selectItem').eq(x).attr('data-label') === '上衣') {
+				for (var x = 0; x < $('.modelItem').length; x += 1) {
+					if ($('.modelItem').eq(x).attr('data-label') === '上衣') {
 						console.log('remove top')
-						$('.selectItem').eq(x).remove()
 						$('.modelItem').eq(x).remove()
+						$('.selectListItem').eq(x).remove()
 					}
-					if ($('.selectItem').eq(x).attr('data-label') === '褲子') {
+					if ($('.modelItem').eq(x).attr('data-label') === '褲子') {
 						console.log('remove bottom')
-						$('.selectItem').eq(x).remove()
 						$('.modelItem').eq(x).remove()
+						$('.selectListItem').eq(x).remove()
 					}
-					if ($('.selectItem').eq(x).attr('data-label') === '裙子') {
+					if ($('.modelItem').eq(x).attr('data-label') === '裙子') {
 						console.log('remove skirt')
-						$('.selectItem').eq(x).remove()
 						$('.modelItem').eq(x).remove()
+						$('.selectListItem').eq(x).remove()
 					}
 				}
 
-			} else if (itemClickLabel === '上衣' && $('.selectItem').eq(i).attr('data-label') === '洋裝') {
-				$('.selectItem').eq(i).remove()
+			} else if (itemClickLabel === '上衣' && $('.modelItem').eq(i).attr('data-label') === '洋裝') {
 				$('.modelItem').eq(i).remove()
-			} else if (itemClickLabel === '褲子' && $('.selectItem').eq(i).attr('data-label') === '洋裝') {
-				$('.selectItem').eq(i).remove()
+				$('.selectListItem').eq(i).remove()
+			} else if (itemClickLabel === '褲子' && $('.modelItem').eq(i).attr('data-label') === '洋裝') {
 				$('.modelItem').eq(i).remove()
-			} else if (itemClickLabel === '裙子' && $('.selectItem').eq(i).attr('data-label') === '洋裝') {
-				$('.selectItem').eq(i).remove()
+				$('.selectListItem').eq(i).remove()
+			} else if (itemClickLabel === '裙子' && $('.modelItem').eq(i).attr('data-label') === '洋裝') {
 				$('.modelItem').eq(i).remove()
-			} else if (itemClickLabel === '褲子' && $('.selectItem').eq(i).attr('data-label') === '裙子') {
-				$('.selectItem').eq(i).remove()
+				$('.selectListItem').eq(i).remove()
+			} else if (itemClickLabel === '褲子' && $('.modelItem').eq(i).attr('data-label') === '裙子') {
 				$('.modelItem').eq(i).remove()
-			} else if (itemClickLabel === '裙子' && $('.selectItem').eq(i).attr('data-label') === '褲子') {
-				$('.selectItem').eq(i).remove()
+				$('.selectListItem').eq(i).remove()
+			} else if (itemClickLabel === '裙子' && $('.modelItem').eq(i).attr('data-label') === '褲子') {
 				$('.modelItem').eq(i).remove()
+				$('.selectListItem').eq(i).remove()
 			}
 		}
 
 		////// if there's an identical item exist => replace bgi
 		if (repeatCategory !== 0) {
-			$('.selectItem').eq(thisOne).css({
+			$('.modelItem').eq(thisOne).css({
 				'background-image': 'url(' + itemClickUseUrl + ')',
 				'z-index': itemClickDisplayOrder,
 				'data-label': itemClickLabel
 			})
-			$('.modelItem').eq(thisOne).css('background-image', 'url(' + itemClickDisplayUrl + ')')
+			$('.selectListItem').eq(thisOne).css('background-image', 'url(' + itemClickDisplayUrl + ')')
 		} else {
 			$('.model')
-				.prepend('<div class="selectItem" style="background-image:url(' + itemClickUseUrl + ');z-index:' + itemClickDisplayOrder + ';" data-label="' + itemClickLabel + '"></div>')
+				.prepend('<div class="modelItem" style="background-image:url(' + itemClickUseUrl + ');z-index:' + itemClickDisplayOrder + ';" data-label="' + itemClickLabel + '"></div>')
 			$('ul.demoList')
-				.prepend('<li class="modelItem" style="background-image: url(' + itemClickDisplayUrl + ');"><div class="deleteBtn">✖</div></li>')
+				.prepend('<li class="selectListItem" style="background-image: url(' + itemClickDisplayUrl + ');"><div class="deleteBtn">✖</div></li>')
 		}
 	}
 
@@ -434,8 +436,8 @@ $('.items').click(function () {
 //delete select item in list
 $('.demoList').on('click', '.deleteBtn', function () { //要監聽不會動的物件，不然無法辨認新增的DOM
 	var id = $(this).closest('li').index()
-	$(this).closest('.modelItem').remove()
-	$('.selectItem').eq(id).remove()
+	$(this).closest('.selectListItem').remove()
+	$('.modelItem').eq(id).remove()
 })
 
 //info modal data
@@ -545,9 +547,9 @@ $('.addCart').on('click', function () {
 })
 
 //cart icon trigger display
-$('.cart').on('click', function () {
+$('.cart a').on('click', function () {
 	if (cartItems.length !== 0) {
-		$(this).find('.cartList').addClass('show')
+		$(this).siblings('.cartList').toggleClass('show')
 	}
 })
 
