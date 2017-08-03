@@ -316,10 +316,18 @@ var apparelList = [{
 	}
 ]
 
-$('.categoryPanel').mouseenter(function(){
-	$('.itemPanel').css('right', '-100%')
-	console.log('in')
-	$('.itemPanel').css('z-index', '1')
+
+
+
+
+$('.categories').click(function(){
+	$('.itemPanel').css('margin-left', '0')
+	$('.modelPanel').css('width', '70%')
+})
+
+$('.model').click(function(){
+	$('.itemPanel').css('margin-left', '-30%')
+	$('.modelPanel').css('width', '100%')
 })
 
 

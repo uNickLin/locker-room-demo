@@ -290,6 +290,7 @@ header{
 main.content{
 	.container-fluid{
 		display: flex;
+		position: relative;
 	}
 	max-width: 1200px;
 	margin: auto;
@@ -307,7 +308,8 @@ main.content{
 
 	// --------------------- Category Panel --------------------
 	.categoryPanel{
-		width: 30%;
+		width: 200px;
+		overflow: hidden;
 		.categories{
 			text-align: center;
 			background-color: #F2F2F2;
@@ -365,12 +367,18 @@ main.content{
 
 
 	// --------------------- Item Panel --------------------
+	.mainPanel{
+		display: flex;
+		width: calc(100% - 200px);
+		overflow: hidden;
+	}
 	.itemPanel{
-		width: 40%;
+		width: 30%;
+		transition: .3s;
 		background-color: #F2F2F2;
 		border-right: 1px solid rgba(0, 0, 0, .2);
 		border-left: 1px solid rgba(0, 0, 0, .2);
-		height: 100vh;
+		margin-left: -30%;
 		#trouser, #skirt, #dress, #bag, #shoes{
 			display: none;
 		}
@@ -433,11 +441,11 @@ main.content{
 
 // --------------------- Model Panel --------------------
 	.modelPanel{
-		width: 70%;
 		display: flex;
+		width: 100%;
+		transition: .3s;
 		.model{
-			width: 50%;
-			height: 620px;
+			width: 100%;
 			border: 1px solid rgba(0,0,0,.2);
 			position: relative;
 			background-image: url(../img/model.png);
@@ -456,7 +464,9 @@ main.content{
 			}
 			.demoList{
 				position: absolute;
-				right: -80px;
+				right: 10px;
+				top: 10px;
+				z-index: 100;
 				height: 100%;
 				overflow: scroll;
 				.selectListItem{
@@ -499,7 +509,7 @@ main.content{
 				}
 			}
 		}
-		@media(max-width: 992px) {
+		@media(max-width: 991px) {
 			.model {
 				border: none;
 				margin: auto;

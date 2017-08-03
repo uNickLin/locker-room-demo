@@ -113,8 +113,8 @@ html
 								img(src="../img/icon-10.png", alt="")
 								p 鞋子
 
-				section.modelPanel
-					section.itemPanel
+				section.mainPanel
+					.itemPanel
 						//- top pannel
 						.row.text-center.itemRow#top
 							.col-sm-6.col-xs-12
@@ -246,23 +246,19 @@ html
 									span $1990
 
 					//- button.clear clear
-					.model
-						.modelItem(style='background-image: url(../img/dress/use/dress_00.png)' data-label="洋裝")
-						.modelItem(style='background-image: url(../img/bag/use/bag_00.png)' data-label="包包")
-						.modelItem(style='background-image: url(../img/shoes/use/shoes_00.png)' data-label="鞋子")
-						ul.demoList
-							li.selectListItem(style='background-image: url(../img/dress/display/dress_000.png)')
-								.deleteBtn &#10006;
-							li.selectListItem(style='background-image: url(../img/bag/display/bag_000.png)')
-								.deleteBtn &#10006;
-							li.selectListItem(style='background-image: url(../img/shoes/display/shoes_000.png)')
-								.deleteBtn &#10006;
+					.modelPanel
+						.model
+							.modelItem(style='background-image: url(../img/dress/use/dress_00.png)' data-label="洋裝")
+							.modelItem(style='background-image: url(../img/bag/use/bag_00.png)' data-label="包包")
+							.modelItem(style='background-image: url(../img/shoes/use/shoes_00.png)' data-label="鞋子")
+							ul.demoList
+								li.selectListItem(style='background-image: url(../img/dress/display/dress_000.png)')
+									.deleteBtn &#10006;
+								li.selectListItem(style='background-image: url(../img/bag/display/bag_000.png)')
+									.deleteBtn &#10006;
+								li.selectListItem(style='background-image: url(../img/shoes/display/shoes_000.png)')
+									.deleteBtn &#10006;
 
-
-
-					//- // Trigger the modal with a button
-					//- button.btn.btn-info.btn-lg Open Modal
-					//- // Modal
 			#myModal.modal.fade(role='dialog')
 				.modal-dialog
 					//- // Modal content
