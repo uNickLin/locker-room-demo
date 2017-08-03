@@ -316,6 +316,13 @@ var apparelList = [{
 	}
 ]
 
+$('.categoryPanel').mouseenter(function(){
+	$('.itemPanel').css('right', '-100%')
+	console.log('in')
+	$('.itemPanel').css('z-index', '1')
+})
+
+
 //toggle item panel
 $('.categories').on('click', function () {
 	var part = $(this).prop('className').split(' ')[1]
