@@ -73,15 +73,15 @@ html
 					h4 商品類別
 					.row.categoryRow
 						.col-md-6
-							.categories(style="opacity: .4;")
+							.categories(style="opacity: .2;")
 								img(src="../img/icon-01.png", alt="")
 								p 髮型
 						.col-md-6
-							.categories(style="opacity: .4;")
+							.categories(style="opacity: .2;")
 								img(src="../img/icon-02.png", alt="")
 								p 飾品
 						.col-md-6
-							.categories(style="opacity: .4;")
+							.categories(style="opacity: .2;")
 								img(src="../img/icon-03.png", alt="")
 								p 內搭
 						.col-md-6
@@ -89,7 +89,7 @@ html
 								img(src="../img/icon-04.png", alt="")
 								p 上衣
 						.col-md-6
-							.categories(style="opacity: .4;")
+							.categories(style="opacity: .2;")
 								img(src="../img/icon-05.png", alt="")
 								p 外套
 						.col-md-6
@@ -251,6 +251,7 @@ html
 							.modelItem(style='background-image: url(../img/dress/use/dress_00.png)' data-label="洋裝")
 							.modelItem(style='background-image: url(../img/bag/use/bag_00.png)' data-label="包包")
 							.modelItem(style='background-image: url(../img/shoes/use/shoes_00.png)' data-label="鞋子")
+							.btn.btn-primary.add-all-in-cart 一鍵加入購物車
 							ul.demoList
 								li.selectListItem(style='background-image: url(../img/dress/display/dress_000.png)')
 									.deleteBtn &#10006;
@@ -292,6 +293,9 @@ html
 
 			#snackBar
 				span 已加入購物車
+			.hide.images-load
+				h1 hihi
+				img(src="", alt="")
 
 	script(src="../js/app.js")
 	

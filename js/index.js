@@ -345,6 +345,7 @@ $('.categories').on('click', function () {
 
 // toggle select item list
 ////store item name
+
 $('.items').click(function () {
 	var itemClickName, itemClickDisplayUrl, itemClickUseUrl, itemClickDisplayOrder, itemClickLabel, thisUseUrl, currentUseUrl, currentLabel, thisOne
 	var itemArr = []
@@ -358,7 +359,6 @@ $('.items').click(function () {
 	for (var i = 0; i < apparelList.length; i += 1) {
 		$.each(apparelList[i].list, function (index, v) {
 			if (v.name.search(itemClickName) != -1) {
-				// itemArr.push(apparelList[i].list[index])
 				itemClickDisplayOrder = apparelList[i].displayOrder
 				itemClickUseUrl = v.images.use
 				itemClickLabel = apparelList[i].categoryName
@@ -439,6 +439,7 @@ $('.items').click(function () {
 				.prepend('<div class="modelItem" style="background-image:url(' + itemClickUseUrl + ');z-index:' + itemClickDisplayOrder + ';" data-label="' + itemClickLabel + '"></div>')
 			$('ul.demoList')
 				.prepend('<li class="selectListItem" style="background-image: url(' + itemClickDisplayUrl + ');"><div class="deleteBtn">✖</div></li>')
+			$('.add-all-in-cart').show()
 		}
 	}
 
@@ -453,7 +454,34 @@ $('.demoList').on('click', '.deleteBtn', function () { //要監聽不會動的�
 	var id = $(this).closest('li').index()
 	$(this).closest('.selectListItem').remove()
 	$('.modelItem').eq(id).remove()
+	checkSelect()
 })
+
+$('.selectListItem').on('click', function(){
+	if (window.innerWidth <= 479) {
+		var id = $(this).closest('li').index()
+		$(this).remove()
+		$('.modelItem').eq(id).remove()
+		checkSelect()
+	}
+})
+
+//add all in shopping cart
+function checkSelect(){
+	if ($('.selectListItem').length === 0) {
+		$('.add-all-in-cart').hide()
+	} else {
+		$('.add-all-in-cart').show()
+	}
+}
+
+
+
+if ($('.selectListItem').length === 0) {
+	$('.add-all-in-cart').hide()
+} else {
+	$('.add-all-in-cart').show()
+}
 
 //info modal data
 $('.infoBtn').click(function (e) {
@@ -532,7 +560,6 @@ $('.addCart').on('click', function () {
 	cartItemBrand = $(this).siblings('h2').text()
 	cartItemName = $(this).siblings('h3').text()
 	cartItemPrice = $(this).siblings('h4').text()
-	console.log(cartItemBrand, cartItemName, cartItemPrice)
 
 	for (var i = 0; i < apparelList.length; i += 1) {
 		$.each(apparelList[i].list, function (index, v) {
@@ -557,10 +584,52 @@ $('.addCart').on('click', function () {
 	snack()
 })
 
+//add all in shopping cart
+$('.add-all-in-cart').on('click', function(){
+	var allCartItemName, allCartItemBrand, allCartItemPrice, allCartItemImage
+	var selectListLength = $('.selectListItem').length
+
+	//比對資料庫圖片名稱撈出名字及價錢等資訊
+	for (var sl = 0; sl < selectListLength; sl++) {
+		listItem = $('.selectListItem').eq(sl).css('background-image').split('display/')[1].split('.png')[0]
+		console.log(listItem)
+		for (var i = 0; i < apparelList.length; i += 1) {
+			$.each(apparelList[i].list, function (index, v) {
+				if (v.images.display.search(listItem) != -1) {
+					console.log('I found it !')
+					allCartItemName = v.name
+					allCartItemBrand = v.brand
+					allCartItemPrice = v.price
+					allCartItemImage = v.images.display
+					console.log(allCartItemName, allCartItemBrand, allCartItemPrice, allCartItemImage)
+				}
+			})
+		}
+
+		
+		cartItems.push({
+			brand: allCartItemBrand,
+			name: allCartItemName,
+			price: allCartItemPrice,
+			image: allCartItemImage
+		})
+		$('.cartItemCounts').text(cartItems.length)
+		$('.cartList').prepend('<li class="cartItem"><div class="cartItemImage"><img src="' + allCartItemImage + '" alt=""></div><div class="cartItemInfo"><span>' + allCartItemBrand + '</span><h5>' + allCartItemName + '</h5><span>' + allCartItemPrice + '</span></div><button class="delCartItem fa fa-trash-o"></button></li>')
+		snack()
+
+	}
+})
+
+
 //cart icon trigger display
 $('.cart a').on('click', function () {
 	if (cartItems.length !== 0) {
-		$(this).siblings('.cartList').toggleClass('show')
+		if (window.innerWidth <= 479) {
+			$(this).siblings('.cartList').toggleClass('showCartMobile')
+		}
+		else {
+			$(this).siblings('.cartList').toggleClass('show')
+		}
 	}
 })
 
@@ -573,16 +642,21 @@ $('.cartList').on('click', '.delCartItem', function (e) {
 		$(this).parent('li').remove()
 		cartItems.pop()
 		$('.cartItemCounts').text(cartItems.length)
-		console.log('click')
 		if (cartItems.length === 0) {
 			$('.cartList').removeClass('show')
+			$('.cartList').removeClass('showCartMobile')
 		}
 	}
 })
 
 //user icon trigger login
 $('.user a').on('click', function () {
-	$(this).siblings('.loginOptions').toggleClass('showLogIn')
+	if (window.innerWidth <= 479) {
+		$(this).siblings('.loginOptions').toggleClass('showLogInMobile')
+	}
+	else{
+		$(this).siblings('.loginOptions').toggleClass('showLogIn')
+	}
 })
 
 
