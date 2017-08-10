@@ -70,7 +70,6 @@ html
 		main.content
 			.container-fluid
 				section.categoryPanel
-					h4 商品類別
 					.row.categoryRow
 						.col-md-6
 							.categories(style="opacity: .2;")
@@ -251,7 +250,9 @@ html
 							.modelItem(style='background-image: url(../img/dress/use/dress_00.png)' data-label="洋裝")
 							.modelItem(style='background-image: url(../img/bag/use/bag_00.png)' data-label="包包")
 							.modelItem(style='background-image: url(../img/shoes/use/shoes_00.png)' data-label="鞋子")
-							.btn.btn-primary.add-all-in-cart 一鍵加入購物車
+							.btn.btn-primary.add-all-in-cart 
+								i.fa.fa-cart-plus 
+								span  一鍵加入購物車
 							ul.demoList
 								li.selectListItem(style='background-image: url(../img/dress/display/dress_000.png)')
 									.deleteBtn &#10006;
@@ -269,7 +270,7 @@ html
 							.row
 								.col-sm-6.itemPhotos
 									ul.itemList
-										.itemAvatar
+										li.itemAvatar
 									.itemSample
 
 								.col-sm-6.itemInfos
@@ -294,8 +295,23 @@ html
 			#snackBar
 				span 已加入購物車
 			.hide.images-load
-				h1 hihi
-				img(src="", alt="")
+				h1 load all model display here secretly
+				img(src="../img/top/use/top_00.png", alt="")
+				img(src="../img/top/use/top_01.png", alt="")
+				img(src="../img/top/use/top_02.png", alt="")
+				img(src="../img/bottom/use/bottom_07.png", alt="")
+				img(src="../img/bottom/use/bottom_08.png", alt="")
+				img(src="../img/bottom/use/bottom_09.png", alt="")
+				img(src="../img/bottom/use/bottom_10.png", alt="")
+				img(src="../img/dress/use/dress_00.png", alt="")
+				img(src="../img/dress/use/dress_01.png", alt="")
+				img(src="../img/dress/use/dress_02.png", alt="")
+				img(src="../img/bag/use/bag_00.png", alt="")
+				img(src="../img/bag/use/bag_01.png", alt="")
+				img(src="../img/bag/use/bag_02.png", alt="")
+				img(src="../img/shoes/use/shoes_00.png", alt="")
+				img(src="../img/shoes/use/shoes_01.png", alt="")
+				img(src="../img/shoes/use/shoes_02.png", alt="")
 
 	script(src="../js/app.js")
 	
