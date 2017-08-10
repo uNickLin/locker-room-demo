@@ -1,5 +1,6 @@
 console.log('success')
 
+// load apparelList json file
 var apparelList
 $.ajax({
 	method: "get",
@@ -13,7 +14,7 @@ $.ajax({
 		console.log('fail')
 	})
 
-//show item panel
+//show item panel once on click category
 $('.categories').click(function(){
 	$('.itemPanel').css('margin-left', '0')
 	$('.modelPanel').css('width', '70%')
@@ -54,22 +55,22 @@ $('.categories').on('click', function () {
 ////store item name
 
 $('.items').click(function () {
-	var itemClickName, itemClickDisplayUrl, itemClickUseUrl, itemClickDisplayOrder, itemClickLabel, thisUseUrl, currentUseUrl, currentLabel, thisOne
+	var itemClickName, itemClickDisplayUrl, itemClickUseUrl, itemClickDisplayOrder, itemClickLabel, thisUseUrl, currentUseUrl, currentLabel, replaceThis
 	var itemArr = []
 	var repeatItem = 0
 	var repeatCategory = 0
 
-	itemClickName = $(this).find('p').eq(1).text()
-	itemClickDisplayUrl = '../img'.concat($(this).find('img').prop('src').split('/img')[1])
+	itemClickName = $(this).find('p').eq(1).text() //e.g. 極簡無袖上衣
+	itemClickDisplayUrl = '../img'.concat($(this).find('img').prop('src').split('/img')[1]) // '../img/......./display/....png'
 
 	////store item image on model
 	for (var i = 0; i < apparelList.length; i += 1) {
 		$.each(apparelList[i].list, function (index, v) {
+			// 在json物件陣列中找名稱符合點擊商品的資訊(沒有符合則會回傳 -1, != -1 有符合物件)
 			if (v.name.search(itemClickName) != -1) {
-				itemClickDisplayOrder = apparelList[i].displayOrder
-				itemClickUseUrl = v.images.use
-				itemClickLabel = apparelList[i].categoryName
-				// console.log(itemClickLabel)
+				itemClickDisplayOrder = apparelList[i].displayOrder // 服裝分類 z-index 權重
+				itemClickUseUrl = v.images.use // '../img/......./use/....png'
+				itemClickLabel = apparelList[i].categoryName //記錄分類名稱後續可以做替換取代
 			}
 		})
 	}
@@ -81,36 +82,36 @@ $('.items').click(function () {
 
 		//detect repeat item by compare use.url image
 		if (currentUseUrl === itemClickUseUrl) {
+			//如果點選的商品已經在選擇清單中, repeatItem 就會一直累加以致於不會進入下方的function
 			repeatItem += 1
 		}
-
 	}
 
 	////if there's no repeat item url, 'repeatCounts' will maintain 0
 	if (repeatItem === 0) {
-
+		//經檢查過後點選的商品沒有被加到選擇清單, 接著開始判斷取代順序, e.g. 上衣跟洋裝不能同時出現; 褲子跟裙子不能同時出現, 佯裝取代 上衣 ＋ （褲子or裙子）
 		for (var i = 0; i < $('.modelItem').length; i += 1) {
 			currentLabel = $('.modelItem').eq(i).attr('data-label')
 			if (currentLabel === itemClickLabel) {
+				//repeatCategory 檢查服裝的部位是不是能夠被替換, 若 = 0 則為新的商品必須新增到清單中, 否則就找可替換的商品欄位做取代 => 不做新增
 				repeatCategory += 1
-				thisOne = i
+				//紀錄這筆要取代的物品在清單中的id(因為清單與套在model上的樣式順序一致, 可以藉此id同時替換掉model身上的樣式)
+				replaceThis = i
 			}
 
 			////// replace the same part of suit
 			if (itemClickLabel === '洋裝') {
+				//如果點選的是 洋裝 , 則清除選擇清單及 model 樣式上的 '上衣' '褲子' '裙子' 
 				for (var x = 0; x < $('.modelItem').length; x += 1) {
 					if ($('.modelItem').eq(x).attr('data-label') === '上衣') {
-						console.log('remove top')
 						$('.modelItem').eq(x).remove()
 						$('.selectListItem').eq(x).remove()
 					}
 					if ($('.modelItem').eq(x).attr('data-label') === '褲子') {
-						console.log('remove bottom')
 						$('.modelItem').eq(x).remove()
 						$('.selectListItem').eq(x).remove()
 					}
 					if ($('.modelItem').eq(x).attr('data-label') === '裙子') {
-						console.log('remove skirt')
 						$('.modelItem').eq(x).remove()
 						$('.selectListItem').eq(x).remove()
 					}
@@ -136,13 +137,16 @@ $('.items').click(function () {
 
 		////// if there's an identical item exist => replace bgi
 		if (repeatCategory !== 0) {
-			$('.modelItem').eq(thisOne).css({
+			//點選有重複類別的商品就依紀錄的 id 替換掉 model 上原有的 圖片 z-index權重 類別標籤
+			$('.modelItem').eq(replaceThis).css({
 				'background-image': 'url(' + itemClickUseUrl + ')',
 				'z-index': itemClickDisplayOrder,
 				'data-label': itemClickLabel
 			})
-			$('.selectListItem').eq(thisOne).css('background-image', 'url(' + itemClickDisplayUrl + ')')
+			//依紀錄的 id 替換選擇清單中的縮圖
+			$('.selectListItem').eq(replaceThis).css('background-image', 'url(' + itemClickDisplayUrl + ')')
 		} else {
+			//若無重複類別的商品, 新增 model 上的樣式及選擇清單中的縮圖
 			$('.model')
 				.prepend('<div class="modelItem" style="background-image:url(' + itemClickUseUrl + ');z-index:' + itemClickDisplayOrder + ';" data-label="' + itemClickLabel + '"></div>')
 			$('ul.demoList')
@@ -151,6 +155,7 @@ $('.items').click(function () {
 		}
 	}
 
+	//歸零所有紀錄
 	repeatItem = 0
 	repeatCategory = 0
 
@@ -165,49 +170,50 @@ $('.demoList').on('click', '.deleteBtn', function () { //要監聽不會動的�
 	checkSelect()
 })
 
-//delete select item when click list on small device
-$('.selectListItem').on('click', function(){
-	if (window.innerWidth <= 479) {
-		var id = $(this).closest('li').index()
-		$(this).remove()
-		$('.modelItem').eq(id).remove()
-		checkSelect()
-	}
-})
-
 //add all in shopping cart button visibility
 function checkSelect(){
+	//選擇清單被清空的話隱藏 '一鍵加入' button
 	if ($('.selectListItem').length === 0) {
 		$('.add-all-in-cart').hide()
 	} else {
 		$('.add-all-in-cart').show()
 	}
 }
-
 checkSelect()
+
+//delete select item when click list on small device
+$('.selectListItem').on('click', function () {
+	if (window.innerWidth <= 479) {
+		var id = $(this).closest('li').index()
+		$(this).remove()
+		$('.modelItem').eq(id).remove()
+		// 每次刪除清單物件都執行一次檢查是否隱藏 一鍵加入 按鈕
+		checkSelect()
+	}
+})
 
 //info modal data
 $('.infoBtn').click(function (e) {
 
 	var infoName, infoBrand, infoPrice, infoDesc, infoMtr
-	var infoImages = [],
-		infoSize = []
+	var infoImages = [], infoSize = []
 
 	e.stopPropagation()
 	$('#myModal').modal('show');
-	infoBrand = $(this).siblings('p').eq(0).text()
-	infoName = $(this).siblings('p').eq(1).text()
+	infoBrand = $(this).siblings('p').eq(0).text() // e.g. AUSTIN W.
+	infoName = $(this).siblings('p').eq(1).text() //e.g. 極簡無袖上衣
 
 	for (var i = 0; i < apparelList.length; i += 1) {
+		// 在json物件陣列中找名稱符合點擊商品的資訊(沒有符合則會回傳 -1, != -1 有符合物件)
 		$.each(apparelList[i].list, function (index, v) {
 			if (v.name.search(infoName) != -1) {
-
 				infoPrice = v.price
 				infoSize = v.size
 				infoDesc = v.desc
 				infoMtr = v.material
 
 				for (var p = 0; p < v.images.info.length; p++) {
+					// 存放在 modal 資訊中商品圖片的陣列
 					infoImages.push(v.images.info[p])
 					/*===============================
 					infoImages = [
@@ -221,12 +227,13 @@ $('.infoBtn').click(function (e) {
 		})
 	}
 
-
 	// clear all itemAvatar and append new list
 	$('.itemAvatar').remove()
+	// 清空所有小圖重新塞入存取的商品圖片陣列
 	for (var image = 0; image < infoImages.length; image++) {
 		$('ul.itemList').append('<li class="itemAvatar" style="background-image:url(' + infoImages[image] + ');background-position:center;background-size:cover;"></li>')
 	}
+	//預設大圖設為第一張商品圖片
 	$('.itemSample').css('background-image', 'url(' + infoImages[0] + ')')
 	infoImages.length = 0 //clear images array
 
@@ -247,10 +254,11 @@ $('.infoBtn').click(function (e) {
 
 })
 
+//當商品圖片清單被點選時要替換掉預設大圖
 $('ul.itemList').on('click', '.itemAvatar', function () {
 	var displayPhoto
 
-	displayPhoto = '../img'.concat($(this).css('background-image').slice(30, $(this).css('background-image').length - 2))
+	displayPhoto = '../img'.concat($(this).css('background-image').slice(30, $(this).css('background-image').length - 2)) // ../img/.../info/...png
 	$('.itemSample').css('background-image', 'url(' + displayPhoto + ')')
 
 })
@@ -273,6 +281,7 @@ $('.addCart').on('click', function () {
 	}
 
 	if (cartItems.length !== 0) {
+		//在單一商品的 modal 中加入購物車時, 先檢查購物車內是否有相同名稱的商品, 若有就先刪除購物車那筆物件
 		for (var index = 0; index < cartItems.length; index++) {
 			if (cartItems[index].name === cartItemName) {
 				cartItems.splice(index, 1)
@@ -280,12 +289,15 @@ $('.addCart').on('click', function () {
 		}
 	}
 
+	//新增點選加入購物車的商品資訊到購物車清單中, 因為前面有先刪除重複物件, 此處僅需做新增
 	cartItems.push({
 		brand: cartItemBrand,
 		name: cartItemName,
 		price: cartItemPrice,
 		image: cartItemImage
 	})
+
+	//每次點選加入購物車的按鈕時, 都將右上角的購物車清單清空, 再重新依現有的 cartItems 陣列依序填入
 	$('.cartItem').remove()
 	for (var id = 0; id < cartItems.length; id++) {
 		$('.cartItemCounts').text(cartItems.length)
@@ -299,27 +311,25 @@ $('.addCart').on('click', function () {
 
 //add all in shopping cart
 $('.add-all-in-cart').on('click', function(){
-	var allCartItemName, allCartItemBrand, allCartItemPrice, allCartItemImage
+	var allCartItemName, allCartItemBrand, allCartItemPrice, allCartItemImage, listItem
 	var selectListLength = $('.selectListItem').length
 
 	$('.cartItem').remove()
 	//比對資料庫圖片名稱撈出名字及價錢等資訊
 	for (var sl = 0; sl < selectListLength; sl++) {
-		listItem = $('.selectListItem').eq(sl).css('background-image').split('display/')[1].split('.png')[0]
-		console.log(listItem)
+		listItem = $('.selectListItem').eq(sl).css('background-image').split('display/')[1].split('.png')[0] // e.g. bag_000
+		//透過每個選擇清單的圖片名稱去找到對應的 json 物件位置, 在儲存所有所需資訊
 		for (var i = 0; i < apparelList.length; i += 1) {
 			$.each(apparelList[i].list, function (index, v) {
 				if (v.images.display.search(listItem) != -1) {
-					console.log('I found it !')
 					allCartItemName = v.name
 					allCartItemBrand = v.brand
 					allCartItemPrice = v.price
 					allCartItemImage = v.images.display
-					console.log(allCartItemName, allCartItemBrand, allCartItemPrice, allCartItemImage)
 				}
 			})
 		}
-		//比對選擇的項目與購物車名稱是否有重複
+		//比對選擇的項目與購物車內的名稱是否有重複, 若有則先刪除購物車內該筆物件
 		if (cartItems.length !== 0) {
 			for (var index = 0; index < cartItems.length; index++) {
 				if (cartItems[index].name === allCartItemName) {
@@ -327,6 +337,8 @@ $('.add-all-in-cart').on('click', function(){
 				}
 			}
 		}
+
+		//將選擇清單中的所有項目依序填入 cartItems 陣列中
 		cartItems.push({
 			brand: allCartItemBrand,
 			name: allCartItemName,
@@ -334,6 +346,8 @@ $('.add-all-in-cart').on('click', function(){
 			image: allCartItemImage
 		})
 	}
+
+	//依目前的 cartItems 陣列重新 render 購物車清單
 	for (var id = 0; id < cartItems.length; id++) {
 		$('.cartItemCounts').text(cartItems.length)
 		$('.cartList').prepend('<li class="cartItem"><div class="cartItemImage"><img src="' + cartItems[id].image + '" alt=""></div><div class="cartItemInfo"><span>' + cartItems[id].brand + '</span><h5>' + cartItems[id].name + '</h5><span>' + cartItems[id].price + '</span></div><button class="delCartItem fa fa-trash-o"></button></li>')
@@ -359,12 +373,22 @@ $('.cart a').on('click', function () {
 
 //cart delete list
 $('.cartList').on('click', '.delCartItem', function (e) {
-	e.stopPropagation()
-
 	var delCartConfirm = confirm('是否要刪除此項目？')
 	if (delCartConfirm === true) {
+		/* ===================================================================================
+		 因為 cartItems 在新增物件時是依序 push , 但 render 到 .cartList 中的 li 時則是反向的 prepend 
+			, 因此要用總數量減掉點選的 id + 1 才能正確刪除 cartItems 陣列中的物件
+
+			cartItems = [0, 1, 2, 3, 4, 5]
+			li.cartItem = cartItems prepend = [5, 4, 3, 2, 1, 0] -> cartItems id
+			li.cartItem = 										[0, 1, 2, 3, 4, 5] -> li.cartItem id
+																				[1, 2, 3, 4, 5, 6] -> li.cartItem id+1
+			欲刪除 li.cartItem id(1) = cartItems id(4) = cartItems.length(6) - li.cartItem id+1(2) = 4
+		====================================================================================*/
+		 var id = $(this).parent('li').index() + 1
+		cartItems.splice( cartItems.length - id , 1)
+
 		$(this).parent('li').remove()
-		cartItems.pop()
 		$('.cartItemCounts').text(cartItems.length)
 		if (cartItems.length === 0) {
 			$('.cartList').removeClass('show')
