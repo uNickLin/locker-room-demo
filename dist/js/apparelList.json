@@ -166,8 +166,7 @@
 					"display": "../img/dress/display/dress_001.png",
 					"use": "../img/dress/use/dress_01.png",
 					"info": [
-						"../img/dress/info/dress_01_0.png",
-						"../img/dress/info/dress_01_1.png"
+						"../img/dress/info/dress_01_0.png"
 					]
 				}
 			},

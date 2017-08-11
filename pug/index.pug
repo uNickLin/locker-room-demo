@@ -72,7 +72,7 @@ html
 				section.categoryPanel
 					.row.categoryRow
 						.col-md-6
-							.categories(style="opacity: .2;")
+							.categories.hair
 								img(src="../img/icon-01.png", alt="")
 								p 髮型
 						.col-md-6
@@ -84,7 +84,7 @@ html
 								img(src="../img/icon-03.png", alt="")
 								p 內搭
 						.col-md-6
-							.categories.top.active
+							.categories.top
 								img(src="../img/icon-04.png", alt="")
 								p 上衣
 						.col-md-6
@@ -114,24 +114,35 @@ html
 
 				section.mainPanel
 					.itemPanel
+						//- hair pannel
+						.row.text-center.itemRow#hair
+							.col-sm-6.col-xs-12
+								.items.hair(data-itemImg="../img/hair/use/hair_00.png")
+									img(src="../img/hair/display/hair_000.png", alt="")
+							.col-sm-6.col-xs-12
+								.items.hair(data-itemImg="../img/hair/use/hair_03.png")
+									img(src="../img/hair/display/hair_003.png", alt="")
+							.col-sm-6.col-xs-12
+								.items.hair(data-itemImg="../img/hair/use/hair_04.png")
+									img(src="../img/hair/display/hair_004.png", alt="")
 						//- top pannel
 						.row.text-center.itemRow#top
 							.col-sm-6.col-xs-12
-								.items
+								.items(data-itemImg="../img/top/display/top_000.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/top/display/top_000.png", alt="")
 									p AUSTIN W.
 									p 極簡無袖上衣
 									span $790
 							.col-sm-6.col-xs-12
-								.items
+								.items(data-itemImg="../img/top/display/top_001.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/top/display/top_001.png", alt="")
 									p FashionMax
 									p 真絲粉色Oversize襯衫
 									span $1990
 							.col-sm-6.col-xs-12
-								.items
+								.items(data-itemImg="../img/top/display/top_002.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/top/display/top_002.png", alt="")
 									p FashionMax
@@ -141,14 +152,14 @@ html
 						//- trouser pannel
 						.row.text-center.itemRow#trouser
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/bottom/display/bottom_007.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/bottom/display/bottom_007.png", alt="")
 									p FashionMax
 									p 刷色Skinny單寧褲
 									span $990
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/bottom/display/bottom_008.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/bottom/display/bottom_008.png", alt="")
 									p FashionMax
@@ -158,14 +169,14 @@ html
 						//- skirt pannel
 						.row.text-center.itemRow#skirt
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/bottom/display/bottom_009.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/bottom/display/bottom_009.png", alt="")
 									p FashionMax
 									p 藍 x 白撞色迷你短裙
 									span $1490
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/bottom/display/bottom_010.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/bottom/display/bottom_010.png", alt="")
 									p FashionMax
@@ -175,21 +186,21 @@ html
 						//- dress pannel
 						.row.text-center.itemRow#dress
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/dress/display/dress_000.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/dress/display/dress_000.png", alt="")
 									p FashionMax
 									p 菱紋膝上連身衣
 									span $790
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/dress/display/dress_001.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/dress/display/dress_001.png", alt="")
 									p FashionMax
 									p 草綠率性洋裝
 									span $990
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/dress/display/dress_002.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/dress/display/dress_002.png", alt="")
 									p FashionMax
@@ -199,21 +210,21 @@ html
 						//- bag pannel
 						.row.text-center.itemRow#bag
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/bag/display/bag_000.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/bag/display/bag_000.png", alt="")
 									p AUSTIN W.
 									p Pashli 經典設計兩用包
 									span $1190
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/bag/display/bag_001.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/bag/display/bag_001.png", alt="")
 									p FashionMax
 									p 質感系靚皮硬挺包
 									span $890
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/bag/display/bag_002.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/bag/display/bag_002.png", alt="")
 									p AUSTIN W.
@@ -223,42 +234,42 @@ html
 						//- shoes pannel
 						.row.text-center.itemRow#shoes
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/shoes/display/shoes_000.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/shoes/display/shoes_000.png", alt="")
 									p FashionMax
 									p 真皮露跟樂福鞋
 									span $3900
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/shoes/display/shoes_001.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/shoes/display/shoes_001.png", alt="")
 									p FashionMax
 									p 黃金女神涼鞋
 									span $2990
 							.col-sm-6
-								.items
+								.items(data-itemImg="../img/shoes/display/shoes_002.png")
 									.infoBtn.fa.fa-search
 									img(src="../img/shoes/display/shoes_002.png", alt="")
 									p FashionMax
 									p 黑色厚底台涼鞋
 									span $1990
 
-					//- button.clear clear
 					.modelPanel
 						.model
-							.modelItem(style='background-image: url(../img/dress/use/dress_00.png)' data-label="洋裝")
-							.modelItem(style='background-image: url(../img/bag/use/bag_00.png)' data-label="包包")
-							.modelItem(style='background-image: url(../img/shoes/use/shoes_00.png)' data-label="鞋子")
+							.modelHairItem(style='background-image: url(../img/hair/use/hair_03.png); background-position: center -30px' data-label="髮型" data-modelItemImg="../img/hair/use/dress_03.png")
+							.modelItem(style='background-image: url(../img/dress/use/dress_00.png); background-position: center -30px' data-label="洋裝" data-modelItemImg="../img/dress/use/dress_00.png")
+							.modelItem(style='background-image: url(../img/bag/use/bag_00.png); background-position: center -30px' data-label="包包" data-modelItemImg="../img/bag/use/bag_00.png")
+							.modelItem(style='background-image: url(../img/shoes/use/shoes_00.png); background-position: center -30px' data-label="鞋子" data-modelItemImg="../img/shoes/use/shoes_00.png")
 							.btn.btn-primary.add-all-in-cart 
 								i.fa.fa-cart-plus 
 								span  一鍵加入購物車
 							ul.demoList
-								li.selectListItem(style='background-image: url(../img/dress/display/dress_000.png)')
+								li.selectListItem(style='background-image: url(../img/dress/display/dress_000.png)' data-selectImg="../img/dress/display/dress_000.png")
 									.deleteBtn &#10006;
-								li.selectListItem(style='background-image: url(../img/bag/display/bag_000.png)')
+								li.selectListItem(style='background-image: url(../img/bag/display/bag_000.png)' data-selectImg="../img/bag/display/bag_000.png")
 									.deleteBtn &#10006;
-								li.selectListItem(style='background-image: url(../img/shoes/display/shoes_000.png)')
+								li.selectListItem(style='background-image: url(../img/shoes/display/shoes_000.png)' data-selectImg="../img/shoes/display/shoes_000.png")
 									.deleteBtn &#10006;
 
 			#myModal.modal.fade(role='dialog')
@@ -296,6 +307,12 @@ html
 				span 已加入購物車
 			.hide.images-load
 				h1 load all model display here secretly
+				img(src="../img/hair/use/hair_00.png", alt="")
+				img(src="../img/hair/display/hair_000.png", alt="")
+				img(src="../img/hair/use/hair_03.png", alt="")
+				img(src="../img/hair/display/hair_003.png", alt="")
+				img(src="../img/hair/use/hair_04.png", alt="")
+				img(src="../img/hair/display/hair_004.png", alt="")
 				img(src="../img/top/use/top_00.png", alt="")
 				img(src="../img/top/use/top_01.png", alt="")
 				img(src="../img/top/use/top_02.png", alt="")
@@ -312,6 +329,43 @@ html
 				img(src="../img/shoes/use/shoes_00.png", alt="")
 				img(src="../img/shoes/use/shoes_01.png", alt="")
 				img(src="../img/shoes/use/shoes_02.png", alt="")
+				img(src="../img/top/info/top_00_0.png", alt="")
+				img(src="../img/top/info/top_00_1.png", alt="")
+				img(src="../img/top/info/top_01_0.png", alt="")
+				img(src="../img/top/info/top_01_1.png", alt="")
+				img(src="../img/top/info/top_01_2.png", alt="")
+				img(src="../img/top/info/top_02_0.png", alt="")
+				img(src="../img/top/info/top_02_1.png", alt="")
+				img(src="../img/bottom/info/bottom_07_0.png", alt="")
+				img(src="../img/bottom/info/bottom_07_1.png", alt="")
+				img(src="../img/bottom/info/bottom_08_0.png", alt="")
+				img(src="../img/bottom/info/bottom_08_1.png", alt="")
+				img(src="../img/bottom/info/bottom_09_0.png", alt="")
+				img(src="../img/bottom/info/bottom_09_1.png", alt="")
+				img(src="../img/bottom/info/bottom_10_0.png", alt="")
+				img(src="../img/bottom/info/bottom_10_1.png", alt="")
+				img(src="../img/dress/info/dress_00_0.png", alt="")
+				img(src="../img/dress/info/dress_00_1.png", alt="")
+				img(src="../img/dress/info/dress_01_0.png", alt="")
+				img(src="../img/dress/info/dress_02_0.png", alt="")
+				img(src="../img/dress/info/dress_02_1.png", alt="")
+				img(src="../img/bag/info/bag_00_0.png", alt="")
+				img(src="../img/bag/info/bag_00_1.png", alt="")
+				img(src="../img/bag/info/bag_00_2.png", alt="")
+				img(src="../img/bag/info/bag_01_0.png", alt="")
+				img(src="../img/bag/info/bag_01_1.png", alt="")
+				img(src="../img/bag/info/bag_01_2.png", alt="")
+				img(src="../img/bag/info/bag_02_0.png", alt="")
+				img(src="../img/bag/info/bag_02_1.png", alt="")
+				img(src="../img/bag/info/bag_02_2.png", alt="")
+				img(src="../img/shoes/info/shoes_00_0.png", alt="")
+				img(src="../img/shoes/info/shoes_00_1.png", alt="")
+				img(src="../img/shoes/info/shoes_00_2.png", alt="")
+				img(src="../img/shoes/info/shoes_01_0.png", alt="")
+				img(src="../img/shoes/info/shoes_01_1.png", alt="")
+				img(src="../img/shoes/info/shoes_01_2.png", alt="")
+				img(src="../img/shoes/info/shoes_02_0.png", alt="")
+				img(src="../img/shoes/info/shoes_02_1.png", alt="")
 
 	script(src="../js/app.js")
 	
