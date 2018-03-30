@@ -4,7 +4,7 @@ console.log('success')
 var apparelList
 $.ajax({
 	method: "get",
-	url: "../js/apparelList.json",
+	url: "js/apparelList.json",
 })
 	.done(function (data) {
 		console.log("JSON access !", data)
@@ -263,7 +263,7 @@ $('.infoBtn').click(function (e) {
 	//insert information
 	$('.itemInfos h2').text(infoBrand)
 	$('.itemInfos h3').text(infoName)
-	$('.itemInfos h4').text('$ ' + infoPrice)
+	$('.itemInfos h4').text(infoPrice)
 
 	//append size
 	$('.itemInfos select.form-control').find('option').remove()
